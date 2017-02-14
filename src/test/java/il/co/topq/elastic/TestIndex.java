@@ -3,9 +3,10 @@ package il.co.topq.elastic;
 import java.io.IOException;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
-
+@Ignore
 public class TestIndex extends AbstractTestCase{
 	
 	@Test

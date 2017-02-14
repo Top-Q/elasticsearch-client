@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import il.co.topq.elastic.model.Post;
 
+@Ignore
 public class TestDocument extends AbstractTestCase{
 	
 	@Test

@@ -52,12 +52,14 @@ The supported operations are:
 
 **Index Operations**
 
+*Create and delete*
+
 ```Java
 
 String settings = "{\"settings\": { \"index\": { \"number_of_shards\": 3, \"number_of_replicas\": 1  }}}";
 String index = "reddit";
 
-try (client = new ESClient("localhost", 9200)) {
+try (ESClient client = new ESClient("localhost", 9200)) {
     client
        .index(index)
        .create(settings);
@@ -71,6 +73,8 @@ try (client = new ESClient("localhost", 9200)) {
 
 **Document Operations**
 
+*Add*
+
 ```Java
 String index = "reddit";
 String doc = "post";
@@ -81,7 +85,7 @@ post0.setOp("Itai");
 post0.setPoints(100);
 post0.setSubreddit("all");
 
-try (client = new ESClient("localhost", 9200)) {
+try (ESClient client = new ESClient("localhost", 9200)) {
     client
         .index(index)
         .document(doc)
@@ -91,14 +95,34 @@ try (client = new ESClient("localhost", 9200)) {
 
 ```
 
-
-**Query Operations**
+*Delete*
 
 ```Java
 String index = "reddit";
 String doc = "post";
 
-try (client = new ESClient("localhost", 9200)) {
+try (ESClient client = new ESClient("localhost", 9200)) {
+    Map<String, Object> response = client
+        .index(index)
+        .document(doc)
+        .delete()
+        .single("100");
+    
+    Assert.assertEquals("deleted", response.get("result").toString());
+}
+
+```
+
+
+**Query Operations**
+
+*Query by term*
+
+```Java
+String index = "reddit";
+String doc = "post";
+
+try (ESClient client = new ESClient("localhost", 9200)) {
     List<Post> posts = client
         .index(index)
         .document(doc)

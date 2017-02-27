@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import il.co.topq.elastic.response.QueryResponse;
-
 
 public class QueryResultHandler {
 
@@ -41,6 +41,25 @@ public class QueryResultHandler {
 				.map(hit -> mapper.convertValue(hit, clazz))
 				.collect(toList());
 //		@formatter:on
+	}
+
+	/**
+	 * Returns the result as JSON string or empty string if fails to parse it
+	 * 
+	 * @return The result as JSon string
+	 */
+	public String asString() {
+		try {
+			return mapper.writeValueAsString(queryResponseList);
+		} catch (JsonProcessingException e) {
+
+		}
+		return "";
+	}
+	
+	@Override
+	public String toString(){
+		return asString();
 	}
 
 }

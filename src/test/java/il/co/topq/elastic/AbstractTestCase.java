@@ -14,6 +14,13 @@ public class AbstractTestCase {
 
 	protected ESClient client;
 
+	protected void sleep(int timeInSeconds) {
+		try {
+			Thread.sleep(timeInSeconds * 1000);
+		} catch (InterruptedException e) {
+		}
+	}
+
 	@Before
 	public void setup() {
 		client = new ESClient("localhost", 9200);

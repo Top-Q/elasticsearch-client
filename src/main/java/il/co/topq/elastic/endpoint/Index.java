@@ -1,7 +1,10 @@
-package il.co.topq.elastic;
+package il.co.topq.elastic.endpoint;
 
 import java.io.IOException;
 import java.util.Map;
+
+import il.co.topq.elastic.ESRest;
+import il.co.topq.elastic.response.generic.GenericResponseHandler;
 
 public class Index {
 
@@ -26,6 +29,12 @@ public class Index {
 	public Index delete() throws IOException {
 		client.delete("/" + indexName, Map.class, true);
 		return this;
+	}
+
+	public GenericResponseHandler stats() throws IOException {
+		@SuppressWarnings("unchecked")
+		Map<String, Object> response = client.get("/" + indexName + "/_stats", Map.class, true);
+		return new GenericResponseHandler(response);
 	}
 
 	public Document document(String documentName) {

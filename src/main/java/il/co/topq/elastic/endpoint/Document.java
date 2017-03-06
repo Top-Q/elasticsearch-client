@@ -1,4 +1,6 @@
-package il.co.topq.elastic;
+package il.co.topq.elastic.endpoint;
+
+import il.co.topq.elastic.ESRest;
 
 public class Document {
 

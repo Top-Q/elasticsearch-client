@@ -5,27 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import il.co.topq.elastic.model.Post;
 
 @Ignore
-public class TestDocument extends AbstractTestCase {
+public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 
-	@Before
-	public void setUp() throws IOException{
-		if (!client.index(INDEX).isExists()){
-			client.index(INDEX).create(SETTINGS);
-		}
-	}
-	
-	public void tearDown() throws IOException{
-		if (client.index(INDEX).isExists()){
-			client.index(INDEX).delete();
-		}
-	}
 	
 	@Test
 	public void testAddDocument() throws IOException {
@@ -35,7 +22,7 @@ public class TestDocument extends AbstractTestCase {
 		post0.setPoints(100);
 		post0.setSubreddit("all");
 		client.index(INDEX).document(DOC).add().single("100", post0);
-
+		sleep(1);
 		List<Post> posts = client.index(INDEX).document(DOC).query().byTerm("id", "555").asClass(Post.class);
 		Assert.assertNotNull(posts);
 		Assert.assertEquals(1, posts.size());

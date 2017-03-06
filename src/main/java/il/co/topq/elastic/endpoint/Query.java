@@ -1,10 +1,12 @@
-package il.co.topq.elastic;
+package il.co.topq.elastic.endpoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import il.co.topq.elastic.response.QueryResponse;
+import il.co.topq.elastic.ESRest;
+import il.co.topq.elastic.response.query.QueryResponse;
+import il.co.topq.elastic.response.query.QueryResponseHandler;
 
 
 public class Query {
@@ -27,11 +29,11 @@ public class Query {
 		this.scroll = scroll;
 	}
 	
-	public QueryResultHandler byQuery(String query) throws IOException{
+	public QueryResponseHandler byQuery(String query) throws IOException{
 		return null;
 	}
 
-	public QueryResultHandler byTerm(String filterTermKey, String filterTermValue) throws IOException {
+	public QueryResponseHandler byTerm(String filterTermKey, String filterTermValue) throws IOException {
 		String requestBody = String.format("{\"size\":%d,\"query\": {\"term\" : { \"%s\" : \"%s\" }  } }", size,
 				filterTermKey, filterTermValue);
 		
@@ -43,7 +45,7 @@ public class Query {
 			responses.add(response);
 			response = scroll(response.getScrollId());
 		}
-		return new QueryResultHandler(responses);
+		return new QueryResponseHandler(responses);
 	}
 
 	private QueryResponse scroll(String scrollId) throws IOException {

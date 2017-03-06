@@ -2,9 +2,13 @@ package il.co.topq.elastic;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.Map;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
+
+import il.co.topq.elastic.endpoint.Index;
+import il.co.topq.elastic.response.generic.GenericResponseHandler;
 
 public class ESClient implements Closeable {
 
@@ -25,5 +29,17 @@ public class ESClient implements Closeable {
 	public Index index(String name) {
 		return new Index(rest, name);
 	}
-
+	
+	public GenericResponseHandler nodes() throws IOException{
+		@SuppressWarnings("unchecked")
+		Map<String,Object> response = rest.get("_nodes", Map.class, true);
+		return new GenericResponseHandler(response);
+	}
+	
+	public GenericResponseHandler stats() throws IOException{
+		@SuppressWarnings("unchecked")
+		Map<String,Object> response = rest.get("_stats", Map.class, true);
+		return new GenericResponseHandler(response);
+	}
+	
 }

@@ -1,4 +1,4 @@
-package il.co.topq.elastic;
+package il.co.topq.elastic.response.query;
 
 import static java.util.stream.Collectors.toList;
 
@@ -9,15 +9,13 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import il.co.topq.elastic.response.QueryResponse;
-
-public class QueryResultHandler {
+public class QueryResponseHandler {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
 	private final List<QueryResponse> queryResponseList;
 
-	public QueryResultHandler(List<QueryResponse> response) {
+	public QueryResponseHandler(List<QueryResponse> response) {
 		super();
 		this.queryResponseList = response;
 	}

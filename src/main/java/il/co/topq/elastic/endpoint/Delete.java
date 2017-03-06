@@ -1,7 +1,9 @@
-package il.co.topq.elastic;
+package il.co.topq.elastic.endpoint;
 
 import java.io.IOException;
 import java.util.Map;
+
+import il.co.topq.elastic.ESRest;
 
 public class Delete {
 

@@ -22,8 +22,16 @@ public class ESRest implements Closeable{
 	public ESRest(RestClient client) {
 		this.client = client;
 	}
+	
+	public <T> T get(String resource, Class<T> responseClass, boolean assertSuccess) throws IOException{ 
+		final Response response = client.performRequest("GET", resource, Collections.singletonMap("pretty", "true"));
+		if (assertSuccess){
+			assertSuccess(response);
+		}
+		return mapper.readValue(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), responseClass);
+	}
 
-	protected <T> T post(String resource, String body, Class<T> responseClass, boolean assertSuccess)
+	public <T> T post(String resource, String body, Class<T> responseClass, boolean assertSuccess)
 			throws IOException {
 		final Response response = client.performRequest("POST", resource, Collections.singletonMap("pretty", "true"),
 				new NStringEntity(body, ContentType.APPLICATION_JSON));
@@ -32,7 +40,7 @@ public class ESRest implements Closeable{
 		}
 		return mapper.readValue(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), responseClass);
 	}
-
+	
 	/**
 	 * 
 	 * @param resource
@@ -40,12 +48,12 @@ public class ESRest implements Closeable{
 	 * @return Status code
 	 * @throws IOException
 	 */
-	protected int head(String resource, boolean assertSuccess) throws IOException {
+	public int head(String resource, boolean assertSuccess) throws IOException {
 		Response response = client.performRequest("HEAD", resource, Collections.singletonMap("pretty", "true"));
 		return response.getStatusLine().getStatusCode();
 	}
 
-	protected <T> T put(String resource, String body ,Class<T> responseClass, boolean assertSuccess) throws IOException {
+	public <T> T put(String resource, String body ,Class<T> responseClass, boolean assertSuccess) throws IOException {
 		final HttpEntity entity = new NStringEntity(body, ContentType.APPLICATION_JSON);
 		final Response response = client.performRequest("PUT", resource, Collections.<String, String>emptyMap(),
 				entity);
@@ -55,7 +63,7 @@ public class ESRest implements Closeable{
 		return mapper.readValue(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), responseClass);
 	}
 
-	protected <T> T delete(String resource,Class<T> responseClass, boolean assertSuccess) throws IOException {
+	public <T> T delete(String resource,Class<T> responseClass, boolean assertSuccess) throws IOException {
 		final Response response = client.performRequest("DELETE", resource, Collections.<String, String>emptyMap());
 		if (assertSuccess) {
 			assertSuccess(response);

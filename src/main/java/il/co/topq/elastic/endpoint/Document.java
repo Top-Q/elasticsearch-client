@@ -24,6 +24,10 @@ public class Document {
 	public Add add() {
 		return new Add(client, indexName, documentName);
 	}
+	
+	public Update update(){
+		return new Update(client, indexName, documentName);
+	}
 
 	public Delete delete() {
 		return new Delete(client, indexName, documentName);

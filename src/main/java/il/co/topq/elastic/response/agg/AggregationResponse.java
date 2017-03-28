@@ -1,6 +1,5 @@
 package il.co.topq.elastic.response.agg;
 
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

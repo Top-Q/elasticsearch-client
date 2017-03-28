@@ -1,5 +1,5 @@
 
-package il.co.topq.elastic.response.query;
+package il.co.topq.elastic.response.generic;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -32,5 +32,9 @@ public class Document {
 	public Delete delete() {
 		return new Delete(client, indexName, documentName);
 	}
+	
+	public Aggs aggs(){
+		return new Aggs(client, indexName, documentName);
+	}
 
 }

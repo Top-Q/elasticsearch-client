@@ -1,5 +1,5 @@
 
-package il.co.topq.elastic.response.query;
+package il.co.topq.elastic.response.generic;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +22,7 @@ public class Hits {
     @JsonProperty("total")
     private Integer total;
     @JsonProperty("max_score")
-    private Integer maxScore;
+    private Double maxScore;
     @JsonProperty("hits")
     private List<Hit> hits = null;
     @JsonIgnore
@@ -39,12 +39,12 @@ public class Hits {
     }
 
     @JsonProperty("max_score")
-    public Integer getMaxScore() {
+    public Double getMaxScore() {
         return maxScore;
     }
 
     @JsonProperty("max_score")
-    public void setMaxScore(Integer maxScore) {
+    public void setMaxScore(Double maxScore) {
         this.maxScore = maxScore;
     }
 

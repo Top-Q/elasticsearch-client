@@ -24,7 +24,7 @@ public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 		post0.setSubreddit("all");
 		client.index(INDEX).document(DOC).add().single("100", post0);
 		sleep(1);
-		List<Post> posts = client.index(INDEX).document(DOC).query().byTerm("id", "555").asClass(Post.class);
+		List<Post> posts = client.index(INDEX).document(DOC).search().byTerm("id", "555").asClass(Post.class);
 		Assert.assertNotNull(posts);
 		Assert.assertEquals(1, posts.size());
 		Post post1 = posts.get(0);
@@ -63,7 +63,7 @@ public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 		post0.setPoints(200);
 		client.index(INDEX).document(DOC).update().single("100", post0);
 		sleep(1);
-		List<Post> posts = client.index(INDEX).document(DOC).query().byTerm("id", "555").asClass(Post.class);
+		List<Post> posts = client.index(INDEX).document(DOC).search().byTerm("id", "555").asClass(Post.class);
 		Post post1 = posts.get(0);
 		Assert.assertEquals(200, post1.getPoints());
 	}
@@ -88,7 +88,7 @@ public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 		Map<String, Object> response = client.index(INDEX).document(DOC).add().bulk(new String[]{"100","200"}, posts);
 		Assert.assertFalse((Boolean)response.get("errors"));
 		sleep(1);
-		final List<Post> postsResponse = client.index(INDEX).document(DOC).query().byTerm("op", "bulk").asClass(Post.class);
+		final List<Post> postsResponse = client.index(INDEX).document(DOC).search().byTerm("op", "bulk").asClass(Post.class);
 		Post post1 = postsResponse.get(0);
 		Assert.assertEquals(100, post1.getPoints());
 		post1 = postsResponse.get(1);
@@ -121,7 +121,7 @@ public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 		client.index(INDEX).document(DOC).update().bulk(new String[]{"100","200"}, posts);
 		sleep(1);
 		
-		final List<Post> postsResponse = client.index(INDEX).document(DOC).query().byTerm("op", "bulk").asClass(Post.class);
+		final List<Post> postsResponse = client.index(INDEX).document(DOC).search().byTerm("op", "bulk").asClass(Post.class);
 		Post post1 = postsResponse.get(0);
 		Assert.assertEquals(200, post1.getPoints());
 		post1 = postsResponse.get(1);

@@ -17,8 +17,8 @@ public class Document {
 		this.documentName = documentName;
 	}
 
-	public Query query() {
-		return new Query(client, indexName, documentName, 100, true);
+	public Search search() {
+		return new Search(client, indexName, documentName, 100, true);
 	}
 
 	public Add add() {
@@ -31,6 +31,10 @@ public class Document {
 
 	public Delete delete() {
 		return new Delete(client, indexName, documentName);
+	}
+	
+	public Aggs aggs(){
+		return new Aggs(client, indexName, documentName);
 	}
 
 }

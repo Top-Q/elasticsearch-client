@@ -10,7 +10,7 @@ import org.junit.Test;
 import il.co.topq.elastic.model.Post;
 
 @Ignore
-public class TestQuery extends AbstractCreateRemoveIndexTestCase {
+public class TestSearch extends AbstractCreateRemoveIndexTestCase {
 
 	@Test
 	public void testGetResultAsMap() throws IOException {
@@ -21,7 +21,7 @@ public class TestQuery extends AbstractCreateRemoveIndexTestCase {
 		post0.setSubreddit("all");
 		client.index(INDEX).document(DOC).add().single("100", post0);
 		sleep(1);
-		List<Post> posts = client.index(INDEX).document(DOC).query().byTerm("id", "555").asClass(Post.class);
+		List<Post> posts = client.index(INDEX).document(DOC).search().byTerm("id", "555").asClass(Post.class);
 		Assert.assertNotNull(posts);
 		Assert.assertEquals(1, posts.size());
 		Post post1 = posts.get(0);
@@ -41,7 +41,7 @@ public class TestQuery extends AbstractCreateRemoveIndexTestCase {
 		post0.setSubreddit("all");
 		client.index(INDEX).document(DOC).add().single("100", post0);
 		sleep(1);
-		String posts = client.index(INDEX).document(DOC).query().byTerm("id", "555").asString();
+		String posts = client.index(INDEX).document(DOC).search().byTerm("id", "555").asString();
 		Assert.assertTrue(posts.contains("\"id\":555,\"op\":\"Itai\",\"subreddit\":\"all\",\"points\":100"));
 
 	}

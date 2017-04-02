@@ -17,8 +17,8 @@ public class Document {
 		this.documentName = documentName;
 	}
 
-	public Query query() {
-		return new Query(client, indexName, documentName, 100, true);
+	public Search search() {
+		return new Search(client, indexName, documentName, 100, true);
 	}
 
 	public Add add() {

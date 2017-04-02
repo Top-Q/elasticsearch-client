@@ -20,7 +20,7 @@ import il.co.topq.elastic.response.generic.Shards;
     "_shards",
     "hits"
 })
-public class QueryResponse {
+public class SearchResponse {
 
 	@JsonProperty("_scroll_id")
 	private String scrollId;

@@ -9,13 +9,13 @@ import java.util.Map;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class QueryResponseHandler {
+public class SearchResponseHandler {
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
-	private final List<QueryResponse> queryResponseList;
+	private final List<SearchResponse> queryResponseList;
 
-	public QueryResponseHandler(List<QueryResponse> response) {
+	public SearchResponseHandler(List<SearchResponse> response) {
 		super();
 		this.queryResponseList = response;
 	}

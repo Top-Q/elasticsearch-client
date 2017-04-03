@@ -39,6 +39,34 @@ public class TestAggregations extends AbstractCreateRemoveIndexTestCase {
 	}
 	
 	@Test
+	public void testMaxAggByQueryWithResult() throws IOException {
+		Post post = new Post();
+		post.setId(555);
+		post.setOp("Foo");
+		post.setPoints(100);
+		post.setSubreddit("all");
+		client.index(INDEX).document(DOC).add().single("100", post);
+		post = new Post();
+		post.setId(777);
+		post.setOp("Itai");
+		post.setPoints(100);
+		post.setSubreddit("all");
+		client.index(INDEX).document(DOC).add().single("102", post);
+		post = new Post();
+		post.setId(666);
+		post.setOp("Foo");
+		post.setPoints(100);
+		post.setSubreddit("all");
+		client.index(INDEX).document(DOC).add().single("101", post);
+
+		sleep(1);
+		Double id = client.index(INDEX).document(DOC).aggs().max("id","op:foo");
+		Assert.assertEquals(666.0d, id, 0);
+
+	}
+
+	
+	@Test
 	public void testMaxAggNoneExistField() throws IOException {
 		Post post = new Post();
 		post.setId(555);

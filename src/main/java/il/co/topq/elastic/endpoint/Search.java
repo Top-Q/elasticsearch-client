@@ -8,11 +8,14 @@ import il.co.topq.elastic.ESRest;
 import il.co.topq.elastic.response.query.SearchResponse;
 import il.co.topq.elastic.response.query.SearchResponseHandler;
 
-
 public class Search {
 
+	private final static String SERCH_BY_TERM = "{\"size\":%d,\"query\": {\"term\" : { \"%s\" : \"%s\" }  } }";
+
+	private final static String SERCH_BY_QUERY = "{\"size\":%d,\"query\": { \"bool\" : { \"must\" : { \"query_string\" : { \"query\" : \"%s\" } }} }}";
+
 	private final ESRest client;
-	
+
 	private final String indexName;
 
 	private final String documentName;
@@ -28,15 +31,8 @@ public class Search {
 		this.size = size;
 		this.scroll = scroll;
 	}
-	
-	public SearchResponseHandler byQuery(String query) throws IOException{
-		return null;
-	}
 
-	public SearchResponseHandler byTerm(String filterTermKey, String filterTermValue) throws IOException {
-		String requestBody = String.format("{\"size\":%d,\"query\": {\"term\" : { \"%s\" : \"%s\" }  } }", size,
-				filterTermKey, filterTermValue);
-		
+	private SearchResponseHandler search(String requestBody) throws IOException {
 		SearchResponse response = client.post("/" + indexName + "/" + documentName + "/_search?scroll=1m", requestBody,
 				SearchResponse.class, true);
 
@@ -46,6 +42,16 @@ public class Search {
 			response = scroll(response.getScrollId());
 		}
 		return new SearchResponseHandler(responses);
+	}
+
+	public SearchResponseHandler byQuery(String query) throws IOException {
+		String requestBody = String.format(SERCH_BY_QUERY, size, query);
+		return search(requestBody);
+	}
+
+	public SearchResponseHandler byTerm(String filterTermKey, String filterTermValue) throws IOException {
+		String requestBody = String.format(SERCH_BY_TERM, size, filterTermKey, filterTermValue);
+		return search(requestBody);
 	}
 
 	private SearchResponse scroll(String scrollId) throws IOException {

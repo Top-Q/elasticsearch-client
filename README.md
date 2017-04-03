@@ -160,7 +160,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double min = client
         .index(index)
         .document(doc)
         .aggs()
@@ -175,7 +175,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double max = client
         .index(index)
         .document(doc)
         .aggs()
@@ -189,7 +189,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double max = client
         .index(index)
         .document(doc)
         .aggs()

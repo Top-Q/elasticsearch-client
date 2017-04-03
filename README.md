@@ -10,7 +10,8 @@ The supported operations are:
 
 * Index creation and deletion
 * Document creation and deletion
-* Query by term
+* Search by term and by query
+* Aggregations with query
 
 ## Getting started
 

@@ -114,9 +114,9 @@ try (ESClient client = new ESClient("localhost", 9200)) {
 ```
 
 
-**Query Operations**
+**Search Operations**
 
-*Query by term*
+*Search by term*
 
 ```Java
 String index = "reddit";
@@ -126,9 +126,73 @@ try (ESClient client = new ESClient("localhost", 9200)) {
     List<Post> posts = client
         .index(index)
         .document(doc)
-        .query()
+        .search()
         .byTerm("id", "1212")
         .asClass(Post.class);
 }
 
 ```
+
+*Search by string query*
+
+```Java
+String index = "reddit";
+String doc = "post";
+
+try (ESClient client = new ESClient("localhost", 9200)) {
+    List<Post> posts = client
+        .index(index)
+        .document(doc)
+        .search()
+        .byQuery("id:1212")
+        .asClass(Post.class);
+}
+
+```
+
+**Aggregation operations**
+
+*Min aggregation*
+
+```Java
+String index = "reddit";
+String doc = "post";
+
+try (ESClient client = new ESClient("localhost", 9200)) {
+    Double  = client
+        .index(index)
+        .document(doc)
+        .aggs()
+        .min("id");        
+}
+```
+
+*Max aggregation*
+
+```Java
+String index = "reddit";
+String doc = "post";
+
+try (ESClient client = new ESClient("localhost", 9200)) {
+    Double  = client
+        .index(index)
+        .document(doc)
+        .aggs()
+        .max("id");        
+}
+```
+*Max aggregation with string query*
+
+```Java
+String index = "reddit";
+String doc = "post";
+
+try (ESClient client = new ESClient("localhost", 9200)) {
+    Double  = client
+        .index(index)
+        .document(doc)
+        .aggs()
+        .max("id","foo:bar");        
+}
+```
+

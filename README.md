@@ -151,6 +151,25 @@ try (ESClient client = new ESClient("localhost", 9200)) {
 
 ```
 
+*Search by range*
+
+```Java
+String index = "reddit";
+String doc = "post";
+Map<String, Object> rangeParams = new HashMap<String, Object>();
+rangeParams.put("gte", "now-30d");
+
+try (ESClient client = new ESClient("localhost", 9200)) {
+    List<Post> posts = client
+        .index(index)
+        .document(doc)
+        .search()
+        .byRange("timeStamp",rangeParams)
+        .asClass(Post.class);
+}
+
+```
+
 **Aggregation operations**
 
 *Min aggregation*

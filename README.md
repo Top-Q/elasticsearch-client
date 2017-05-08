@@ -10,7 +10,8 @@ The supported operations are:
 
 * Index creation and deletion
 * Document creation and deletion
-* Query by term
+* Search by term and by query
+* Aggregations with query
 
 ## Getting started
 
@@ -159,7 +160,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double min = client
         .index(index)
         .document(doc)
         .aggs()
@@ -174,7 +175,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double max = client
         .index(index)
         .document(doc)
         .aggs()
@@ -188,7 +189,7 @@ String index = "reddit";
 String doc = "post";
 
 try (ESClient client = new ESClient("localhost", 9200)) {
-    Double  = client
+    Double max = client
         .index(index)
         .document(doc)
         .aggs()

@@ -17,6 +17,8 @@ public class Search {
 
 	private final static String SERCH_BY_TERM = "{\"size\":%d,\"query\": {\"term\" : { \"%s\" : \"%s\" }  } }";
 
+	private final static String SERCH_BY_WILDCARD = "{\"size\":%d,\"query\": {\"wildcard\" : { \"%s\" : \"%s\" }  } }";
+	
 	private final static String SERCH_BY_QUERY = "{\"size\":%d,\"query\": { \"bool\" : { \"must\" : { \"query_string\" : { \"query\" : \"%s\" } }} }}";
 
 	private final static String SERCH_BY_RANGE = "{\"size\":%d,\"query\": { \"range\" : { \"%s\" :  %s  } }}";
@@ -58,6 +60,11 @@ public class Search {
 
 	public SearchResponseHandler byTerm(String filterTermKey, String filterTermValue) throws IOException {
 		String requestBody = String.format(SERCH_BY_TERM, size, filterTermKey, filterTermValue);
+		return search(requestBody);
+	}
+	
+	public SearchResponseHandler byWildcard(String filterWildCardKey, String filterWildCardValue) throws IOException {
+		String requestBody = String.format(SERCH_BY_WILDCARD, size, filterWildCardKey, filterWildCardValue);
 		return search(requestBody);
 	}
 

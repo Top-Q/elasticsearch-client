@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import il.co.topq.elastic.model.Post;
 
-@Ignore
+//@Ignore
 public class TestAggregations extends AbstractCreateRemoveIndexTestCase {
 
 	@Test

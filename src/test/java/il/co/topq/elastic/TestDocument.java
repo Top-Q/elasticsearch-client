@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import il.co.topq.elastic.model.Post;
 
-//@Ignore
+@Ignore
 public class TestDocument extends AbstractCreateRemoveIndexTestCase {
 
 	

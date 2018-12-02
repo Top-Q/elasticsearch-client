@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import il.co.topq.elastic.model.Post;
 
-//@Ignore
+@Ignore
 public class TestSearch extends AbstractCreateRemoveIndexTestCase {
 
 	@Test

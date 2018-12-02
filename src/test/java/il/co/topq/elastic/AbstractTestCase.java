@@ -23,7 +23,11 @@ public class AbstractTestCase {
 
 	@Before
 	public void setup() {
-		client = new ESClient("localhost", 9200);
+		client = initClient();
+	}
+	
+	protected ESClient initClient() {
+		return ESClient.builder().addClient("localhost", 9200).build();
 	}
 
 	@After

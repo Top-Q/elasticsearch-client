@@ -41,7 +41,7 @@ public class Update {
 			sb.append(mapper.writeValueAsString(objects.get(i)));
 			sb.append("}").append("\n");
 		}
-		return client.post(String.format("/%s/%s/_bulk", indexName,documentName),sb.toString(),Map.class,true);
+		return client.post(String.format("/%s/%s/_bulk?refresh=wait_for", indexName,documentName),sb.toString(),Map.class,true);
 	}
 	
 }

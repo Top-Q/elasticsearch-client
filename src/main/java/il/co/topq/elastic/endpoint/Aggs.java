@@ -55,7 +55,7 @@ public class Aggs {
 		} else {
 			requestBody = String.format(AGG_WITH_QUERY, queryString, aggFileldName, aggregation, field);
 		}
-		AggregationResponse response = client.post("/" + indexName + "/" + documentName + "/_search?", requestBody,
+		AggregationResponse response = client.post("/" + indexName + "/_search?", requestBody,
 				AggregationResponse.class, true);
 		@SuppressWarnings("unchecked")
 		final Object result = ((Map<String, String>) response.getAggregations().get(aggFileldName)).get("value");

@@ -21,7 +21,7 @@ public class Delete {
 
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> single(String id) throws IOException {
-		return client.delete(String.format("/%s/%s/%s", indexName, documentName, id), Map.class, true);
+		return client.delete(String.format("/%s/_doc/%s", indexName, id), Map.class, true);
 	}
 
 }

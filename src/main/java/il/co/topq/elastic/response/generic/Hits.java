@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Hits {
 
     @JsonProperty("total")
-    private Integer total;
+    private Total total;
     @JsonProperty("max_score")
     private Double maxScore;
     @JsonProperty("hits")
@@ -29,12 +29,12 @@ public class Hits {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("total")
-    public Integer getTotal() {
+    public Total getTotal() {
         return total;
     }
 
     @JsonProperty("total")
-    public void setTotal(Integer total) {
+    public void setTotal(Total total) {
         this.total = total;
     }
 

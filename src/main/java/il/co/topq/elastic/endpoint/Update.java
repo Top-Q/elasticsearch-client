@@ -26,7 +26,7 @@ public class Update {
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> single(String id, Object object) throws IOException{
-		return client.put(String.format("/%s/%s/%s", indexName, documentName, id), mapper.writeValueAsString(object), Map.class, true);
+		return client.put(String.format("/%s/_doc/%s", indexName, id), mapper.writeValueAsString(object), Map.class, true);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -41,7 +41,7 @@ public class Update {
 			sb.append(mapper.writeValueAsString(objects.get(i)));
 			sb.append("}").append("\n");
 		}
-		return client.post(String.format("/%s/%s/_bulk?refresh=wait_for", indexName,documentName),sb.toString(),Map.class,true);
+		return client.post(String.format("/%s/_bulk?refresh=wait_for", indexName),sb.toString(),Map.class,true);
 	}
 	
 }

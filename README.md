@@ -2,7 +2,7 @@
 Elasticsearch Java Client
 =========================
 
-A simple Elasticseach client based on the 5.x HTTP API. This is by no means a full blown client and it support only a small sub set of the Elasticseach operations.
+A simple Elasticseach client based on the 7.x HTTP API. This is by no means a full blown client and it support only a small sub set of the Elasticseach operations.
 Furethemore, when the Elasticteam will release a full Java client, this client will probably become redundent. 
 Nevertheless, the client is very simple for use, supports the basic operations and is designed to easily be extended.
 

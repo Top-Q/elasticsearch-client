@@ -45,7 +45,7 @@ public class ESRest implements Closeable {
 		if (assertSuccess) {
 			assertSuccess(response);
 		}
-		return mapper.readValue(IOUtils.toString(response.getEntity().getContent(), "UTF-8"), responseClass);
+		return mapper.readValue(IOUtils.toString(response.getEntity().getContent()), responseClass);
 	}
 
 	/**

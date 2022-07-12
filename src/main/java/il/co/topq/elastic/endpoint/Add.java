@@ -35,11 +35,11 @@ public class Add {
 			sb.append(String.format("{ \"create\": {\"_id\":\"%s\"}\n", ids[i]));
 			sb.append(mapper.writeValueAsString(objects.get(i))).append("\n");
 		}
-		return client.post(String.format("/%s/%s/_bulk", indexName,documentName),sb.toString(),Map.class,true);
+		return client.post(String.format("/%s/_bulk", indexName),sb.toString(),Map.class,true);
 	}
 	
 	public Map<String,Object> single(String id, Object object) throws IOException{
-		List<Object> objects = new ArrayList<Object>();
+		List<Object> objects = new ArrayList<>();
 		objects.add(object);
 		return bulk(new String[]{id}, objects);
 	}

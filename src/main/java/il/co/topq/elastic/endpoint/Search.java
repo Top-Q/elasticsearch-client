@@ -42,7 +42,7 @@ public class Search {
 	}
 
 	private SearchResponseHandler search(String requestBody) throws IOException {
-		SearchResponse response = client.post("/" + indexName + "/" + documentName + "/_search?scroll=1m", requestBody,
+		SearchResponse response = client.post("/" + indexName + "/_search?scroll=1m", requestBody,
 				SearchResponse.class, true);
 
 		final List<SearchResponse> responses = new ArrayList<SearchResponse>();
